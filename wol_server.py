@@ -12,6 +12,8 @@ hostName = <YourWOLServerHostname> # e.g. "192.168.0.135"
 serverPort = <YourWOLServerPort> # e.g. 8565
 macAdress = <YourTargetServerMacAdress> # e.g. "xx:xx:xx:xx:xx:xx"
 domain <YoutTargetDomain> # e.g. "http://mycool.domain.com"
+timeout = 120 # nr of seconds to wait untill resource is considered as timed out
+timewait = 1 # seconds to wait between resource checks
 
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -22,7 +24,7 @@ class MyServer(BaseHTTPRequestHandler):
         # send_magic_packet(macAdress)
 
         # wait for the resource to be available
-        self.waitForResourceAvailable(domain,120,1)
+        self.waitForResourceAvailable(domain,timeout,timewait)
 
         # redirect to desired domain
         self.send_response(301)
